@@ -2,22 +2,29 @@
   <div class="mainPanel d-flex flex-column align-items-center">
     <div class="title-cat d-flex align-items-center justify-content-center"><h2 style="color: magenta;">Category</h2></div>
     <div class="cont-cat">
-      <div class="category btn-primary d-flex align-items-center justify-content-center">All</div>
-      <div class="category btn-primary d-flex align-items-center justify-content-center">Fruits</div>
-      <div class="category btn-primary d-flex align-items-center justify-content-center">Clothes</div>
-      <div class="category btn-primary d-flex align-items-center justify-content-center">Cars</div>
-      <div class="category btn-primary d-flex align-items-center justify-content-center">Gadgets</div>
-      <div class="category btn-primary d-flex align-items-center justify-content-center">Tools</div>
-      <div class="category btn-primary d-flex align-items-center justify-content-center">Buildings</div>
-      <div class="category btn-primary d-flex align-items-center justify-content-center">Health</div>
+      <div @click.prevent="searchCat()" class="category btn-primary d-flex align-items-center justify-content-center">All</div>
+      <div @click.prevent="searchCat('Fruit')" class="category btn-primary d-flex align-items-center justify-content-center">Fruit</div>
+      <div @click.prevent="searchCat('Apparel')" class="category btn-primary d-flex align-items-center justify-content-center">Apparel</div>
+      <div @click.prevent="searchCat('Automotive')" class="category btn-primary d-flex align-items-center justify-content-center">Automotive</div>
+      <div @click.prevent="searchCat('Gadget')" class="category btn-primary d-flex align-items-center justify-content-center">Gadget</div>
+      <div @click.prevent="searchCat('Tool')" class="category btn-primary d-flex align-items-center justify-content-center">Tool</div>
+      <div @click.prevent="searchCat('Building')" class="category btn-primary d-flex align-items-center justify-content-center">Building</div>
+      <div @click.prevent="searchCat('Health')" class="category btn-primary d-flex align-items-center justify-content-center">Health</div>
+      <div @click.prevent="searchCat('Other')" class="category btn-primary d-flex align-items-center justify-content-center">Other</div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'mainPanel',
-  components: {
+  methods: {
+    ...mapActions(['getProduct']),
+    searchCat (tag) {
+      console.log(tag)
+      this.getProduct(tag)
+    }
   }
 }
 </script>

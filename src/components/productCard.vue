@@ -1,13 +1,19 @@
 <template>
   <div class="col-3 mt-1 mb-1">
-    <div class="card" style="width: 18rem; height: 24rem">
-  <img class="card-img-top" src="https://discountseries.com/wp-content/uploads/2017/09/default.jpg" alt="Card image cap">
+    <div class="card pt-4" style="width: 18rem; height: 24rem">
+      <div id="img" :style="this.urlData"></div>
   <div class="card-body d-flex flex-column align-items-center">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <h5 class="card-title">{{name}}</h5>
+    <div class="d-flex flex-row flex-wrap justify-content-between mb-2 mt-2" style="width: 16rem;">
+      <p class="card-text">Price: {{price}}</p>
+      <p class="card-text">Stock: {{stock}}</p>
+      <p class="card-text">Category: {{category}}</p>
+    </div>
     <div class="d-flex justify-content-end" style="width: 100%;">
-      <a href="#" class="btn btn-primary m-1">Edit</a>
-      <a href="#" class="btn btn-danger m-1">Delete</a>
+      <div @click.prevent="edit" class="m-1"><router-link :to="{ name: 'editPage', params: { id: this.id } }" tag="button" class="btn-primary form-control m-1">Edit</router-link></div>
+      <div @click.prevent="deleteProd" class="m-1"><button class="btn-danger form-control m-1">Delete</button></div>
+      <!-- <div class="m-1"><router-link to="/home" tag="button" class="btn-danger form-control m-1">Delete</router-link></div>
+       -->
     </div>
   </div>
 </div>
@@ -15,11 +21,47 @@
 </template>
 
 <script>
+import { mapMutations, mapActions } from 'vuex'
 export default {
-  name: 'productCard'
+  name: 'productCard',
+  props: ['id', 'name', 'image_url', 'price', 'stock', 'category'],
+  methods: {
+    ...mapMutations(['SET_EDITPRODUCT']),
+    ...mapActions(['deleteProduct']),
+    edit () {
+      this.SET_EDITPRODUCT(this.currentProd)
+    },
+    deleteProd () {
+      this.deleteProduct(this.id)
+    }
+  },
+  computed: {
+    urlData () {
+      return `background-image: url("${this.image_url}");`
+    },
+    currentProd () {
+      return {
+        id: this.id,
+        name: this.name,
+        image_url: this.image_url,
+        price: this.price,
+        stock: this.stock,
+        category: this.category
+      }
+    }
+  },
+  created () {
+    // console.log(this.currentProd)
+  }
 }
 </script>
 
 <style>
-
+#img {
+  width: 17rem;
+  height: 180px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
 </style>

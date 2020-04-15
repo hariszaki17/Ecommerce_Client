@@ -5,6 +5,7 @@ import Home from '../views/Dashboard.vue'
 import landingPage from '../views/landingPage.vue'
 import dashboardPage from '../views/dashboardPage.vue'
 import addPage from '../views/addBoard.vue'
+import editPage from '../views/editBoard.vue'
 
 Vue.use(VueRouter)
 
@@ -25,6 +26,11 @@ const routes = [
       {
         path: '/home/addProduct',
         component: addPage
+      },
+      {
+        path: '/home/edit/:id',
+        name: 'editPage',
+        component: editPage
       }
     ]
   },

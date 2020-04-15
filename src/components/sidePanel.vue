@@ -1,7 +1,7 @@
 <template>
   <div class="sidePanel">
     <div class="row p-5">
-      <productCard v-for="product in products" :key="product.id"></productCard>
+      <productCard v-for="product in products" :key="product.id" :name="product.name" :price="product.price" :image_url="product.image_url" :stock="product.stock" :id="product.id" :category="product.category"></productCard>
     </div>
   </div>
 </template>
@@ -14,11 +14,13 @@ export default {
     productCard
   },
   computed: {
-    products() {
-      return this.$store.state.products
+    products: {
+      get () {
+        return this.$store.state.products
+      }
     }
   },
-  created() {
+  created () {
     console.log(this.products)
   }
 }
