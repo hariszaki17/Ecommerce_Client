@@ -9,11 +9,11 @@
 import mainPanel from '../components/mainPanel'
 import sidePanel from '../components/sidePanel'
 export default {
-    name: 'dbPage',
-    components: {
-        mainPanel,
-        sidePanel
-    }
+  name: 'dbPage',
+  components: {
+    mainPanel,
+    sidePanel
+  }
 }
 </script>
 

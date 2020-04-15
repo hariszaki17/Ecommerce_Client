@@ -1,7 +1,7 @@
 <template>
   <div class="sideBar d-flex flex-column align-items-center justify-content-between">
       <navButton></navButton>
-      <logoutBtn></logoutBtn>      
+      <logoutBtn></logoutBtn>
   </div>
 </template>
 
@@ -9,11 +9,11 @@
 import logoutBtn from '../components/logoutBtn'
 import navButton from '../components/navButton'
 export default {
-    name: "sideBar",
-    components: {
-        logoutBtn,
-        navButton
-    }
+  name: 'sideBar',
+  components: {
+    logoutBtn,
+    navButton
+  }
 }
 </script>
 

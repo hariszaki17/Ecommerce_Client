@@ -7,14 +7,18 @@
 <script>
 import board from '../components/dbBoard'
 export default {
-    components: {
-        board
-    },
-    created () {
-        if (!localStorage.access_token) {
-        this.$router.push('/')
-        }
+  components: {
+    board
+  },
+  created () {
+    if (!localStorage.access_token) {
+      this.$router.push('/')
+    } else {
+      // this.$router.push('home')
+      this.$store.dispatch('getProduct')
+      console.log(this.$store.state.message)
     }
+  }
 }
 </script>
 

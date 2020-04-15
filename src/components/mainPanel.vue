@@ -16,9 +16,9 @@
 
 <script>
 export default {
-    name: 'mainPanel',
-    components: {
-    }
+  name: 'mainPanel',
+  components: {
+  }
 }
 </script>
 

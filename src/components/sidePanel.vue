@@ -1,17 +1,7 @@
 <template>
   <div class="sidePanel">
     <div class="row p-5">
-      <productCard></productCard>
-      <productCard></productCard>
-      <productCard></productCard>
-      <productCard></productCard>
-      <productCard></productCard>
-      <productCard></productCard>
-      <productCard></productCard>
-      <productCard></productCard>
-      <productCard></productCard>
-      <productCard></productCard>
-      <productCard></productCard>
+      <productCard v-for="product in products" :key="product.id"></productCard>
     </div>
   </div>
 </template>
@@ -19,10 +9,18 @@
 <script>
 import productCard from '../components/productCard'
 export default {
-    name: "sidePanel",
-    components: {
-      productCard
+  name: 'sidePanel',
+  components: {
+    productCard
+  },
+  computed: {
+    products() {
+      return this.$store.state.products
     }
+  },
+  created() {
+    console.log(this.products)
+  }
 }
 </script>
 
@@ -33,7 +31,5 @@ export default {
     height: 95%;
     background-color: magenta;
     overflow: scroll;
-    /* background-color: yellow; */
-    /* border: black solid 2px; */
 }
 </style>

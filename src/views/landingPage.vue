@@ -5,9 +5,9 @@
 
 <script>
 export default {
-    name: 'landingPage',
-    components: {
-    }
+  name: 'landingPage',
+  components: {
+  }
 }
 </script>
 

@@ -16,7 +16,7 @@
 
 <script>
 export default {
-    name: "productCard"
+  name: 'productCard'
 }
 </script>
 

@@ -8,10 +8,10 @@
 <script>
 import sideBar from '../components/sideBar'
 export default {
-    components: {
-        sideBar
-    },
-    name: 'board'
+  components: {
+    sideBar
+  },
+  name: 'board'
 }
 </script>
 
