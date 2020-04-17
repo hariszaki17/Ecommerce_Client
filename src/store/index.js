@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import router from '../router'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -20,42 +21,50 @@ export default new Vuex.Store({
   },
   actions: {
     addProduct (context, payload) {
-      axios({
-        method: 'POST',
-        url: this.state.baseUrl + '/products',
-        headers: {
-          access_token: localStorage.access_token
-        },
-        data: payload
-      })
-        .then((result) => {
-          console.log(result)
-          context.dispatch('getProduct')
-        }).catch((err) => {
-          console.log(err)
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'POST',
+          url: this.state.baseUrl + '/products',
+          headers: {
+            access_token: localStorage.access_token
+          },
+          data: payload
         })
+          .then((result) => {
+            resolve(result)
+            context.dispatch('getProduct')
+            router.push('/home/dashboard')
+          }).catch((err) => {
+            reject(err.response.data.errors)
+            console.log(err.response)
+          })
+      }) 
     },
     editProduct (context, payload) {
-      console.log(payload)
-      axios({
-        method: 'PATCH',
-        url: this.state.baseUrl + `/products/${payload.id}`,
-        headers: {
-          access_token: localStorage.access_token
-        },
-        data: payload
-      })
-        .then((result) => {
-          console.log(result)
-          context.dispatch('getProduct')
-        }).catch((err) => {
-          console.log(err)
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'PATCH',
+          url: this.state.baseUrl + `/products/${payload.id}`,
+          headers: {
+            access_token: localStorage.access_token
+          },
+          data: payload
         })
+          .then((result) => {
+            console.log(result)
+            resolve(result)
+            context.dispatch('getProduct')
+            router.push('/home/dashboard')
+          }).catch((err) => {
+            resolve(err)
+            console.log(err)
+          })
+      })  
     },
     getProduct (context, tag) {
       const categorySrc = tag || ''
       console.log(tag)
-      axios({
+      return axios({
         method: 'GET',
         url: this.state.baseUrl + '/products?category=' + categorySrc,
         headers: {
@@ -70,21 +79,29 @@ export default new Vuex.Store({
         })
     },
     deleteProduct (context, id) {
-      axios({
-        method: 'DELETE',
-        url: this.state.baseUrl + `/products/${id}`,
-        headers: {
-          access_token: localStorage.access_token
-        }
-      })
-        .then((result) => {
-          console.log(result.data.products)
-          context.dispatch('getProduct')
-        }).catch((err) => {
-          console.log(err)
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'DELETE',
+          url: this.state.baseUrl + `/products/${id}`,
+          headers: {
+            access_token: localStorage.access_token
+          }
         })
+          .then((result) => {
+            resolve({
+              result
+            })
+            context.dispatch('getProduct')
+          }).catch((err) => {
+            reject({
+              errors: err
+            })
+            console.log(err)
+          })
+      }) 
     }
   },
   modules: {
   }
 })
+

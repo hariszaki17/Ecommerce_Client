@@ -1,8 +1,8 @@
 <template>
   <div class="navButton p-1 mt-2 d-flex flex-column align-items-center justify-content-start">
-      <router-link to="/home" tag='button' class="btnNav form-control btn-success m-1">H</router-link>
-      <router-link to="/home/dashboard" tag='button' class="btnNav form-control btn-warning m-1">D</router-link>
-      <router-link to="/home/addProduct" tag='button' class="btnNav form-control btn-primary m-1">A</router-link>
+      <router-link to="/home" tag='button' class="btnNav form-control btn-success m-1"><i class='fas fa-home'></i></router-link>
+      <router-link to="/home/dashboard" tag='button' class="btnNav form-control btn-warning m-1"><i class='fas fa-clipboard-list'></i></router-link>
+      <router-link to="/home/addProduct" tag='button' class="btnNav form-control btn-primary m-1"><i class='fas fa-plus'></i></router-link>
 
   </div>
 </template>

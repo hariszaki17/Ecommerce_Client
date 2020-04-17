@@ -15,6 +15,12 @@ export default {
       this.$router.push('/')
     } else {
       // this.$router.push('home')
+      this.$swal.fire({
+        icon: 'success',
+        title: 'You are logged in successfully',
+        showConfirmButton: false,
+        timer: 1500
+      })
       this.$store.dispatch('getProduct')
       console.log(this.$store.state.message)
     }

@@ -1,5 +1,6 @@
 <template>
   <div class="formAdd p-5 -flex flex-column align-items-center justify-content-center">
+    <vue-element-loading :active="isLoading" :is-full-screen="true"/>
       <form @submit.prevent="add">
           <h2 style="color: white;">Add Product</h2><br>
             <input type="text" name="name" id="name" class="form-control" placeholder="name" v-model="productName" required><br>
@@ -25,7 +26,11 @@
 <script>
 import { mapActions } from 'vuex'
 import firebase from 'firebase'
+import VueElementLoading from 'vue-element-loading'
 export default {
+  components: {
+    VueElementLoading
+  },
   data () {
     return {
       productName: '',
@@ -34,33 +39,35 @@ export default {
       productStock: '',
       productCategory: 'Fruit',
       productImage: null,
-      baseUrl: 'http://localhost:3000',
-      imageData: null
+      // baseUrl: 'http://localhost:3000',
+      imageData: null,
+      isLoading: false
     }
   },
   methods: {
     ...mapActions(['addProduct', 'getProduct']),
     add () {
-      this.uploadFile(this.imageData.name, this.imageData)
+      try {
+        if (!this.imageData) {
+          console.log('haiii semua')
+            throw new Error('Image is required')
+        } else {
+          this.isLoading = true
+          this.uploadFile(this.imageData.name, this.imageData)
+         
+        }
+        
+      } catch (error) {
+        this.$swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: `${error.message}`
+        })
+      }
     },
     onSelected (event) {
       this.imageData = event.target.files[0]
-      console.log(this.imageData)
     },
-    // onUpload () {
-    //   this.productImage = null
-    //   const storageRef = firebase.storage().ref().child(`images/`).put(this.imageData)
-    //   storageRef.on('state_changed', () => {
-    //     storageRef.snapshot.ref.getDownloadURL()
-    //     .then((url) => {
-    //       this.productImage = url
-    //       console.log(this.productImage)
-    //     })
-    //     .catch(err => {
-    //       console.log(err)
-    //     })
-    //   }, error => { console.log(error) },)
-    // }
     uploadFile (pathToName, file) {
       new Promise((resolve, reject) => {
         const task = firebase.storage().ref(pathToName).put(file)
@@ -79,14 +86,33 @@ export default {
                 stock: +this.productStock,
                 category: this.productCategory
               }
-              console.log(payload)
+              
               this.addProduct(payload)
+              .then((result) => {
+                console.log(result, '<<<<<<')
+              }).catch((err) => {
+                console.log('wawa')
+                let errorsMessage = ''
+                err.forEach(el => {
+                  errorsMessage += el.message + '\n\n'
+                })
+                this.$swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: `${errorsMessage}`
+                })
+                console.log(err, '<<<<<<<')
+              })
+              .finally(() => {
+                this.isLoading = false
+              });
               this.productName = ''
               this.productPrice = ''
               this.productStock = ''
               this.productCategory = 'Fruit'
             })
             .catch(reject => {
+              this.isLoading = false
               console.log(reject)
             })
         }

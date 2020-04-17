@@ -15,14 +15,17 @@
 
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex' 
 export default {
   name: 'formLogin',
   data () {
     return {
       emailInput: '',
-      passwordInput: '',
-      baseUrl: 'http://localhost:3000'
+      passwordInput: ''
     }
+  },
+  computed: {
+    ...mapState(['baseUrl'])
   },
   methods: {
     login () {
@@ -40,7 +43,11 @@ export default {
           this.$router.push('home')
         })
         .catch((err) => {
-          console.log(err)
+          this.$swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: `${err.response.data.errors[0].message}`
+          })
         })
     }
   }

@@ -3,8 +3,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import firebase from 'firebase'
+import VueSweetalert2 from 'vue-sweetalert2';
 
 Vue.config.productionTip = false
+Vue.use(VueSweetalert2);
 var firebaseConfig = {
   apiKey: 'AIzaSyBC88y8hbfyjrIisP8PwVV-d6TcdpYo0rQ',
   authDomain: 'storagetest-6ef69.firebaseapp.com',

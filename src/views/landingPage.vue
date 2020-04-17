@@ -4,18 +4,19 @@
     id="slider"
       animation="fade"
       v-model="sliderValue"
-      :duration="15000"
+      :duration="1000"
       :speed="1000"
       class="d-flex align-items-center"
     >
       <SliderItem
+      id="sliderItem"
         v-for="(i, index) in list"
         :key="index"
         @click="changeIndex(1);"
         :style="i"
       >
         <p style="line-height: 280px; font-size: 5rem; text-align: center;">
-          Page{{ index + 1 }}
+         {{message[index]}}
         </p>
       </SliderItem>
     </Slider>
@@ -33,7 +34,13 @@ export default {
   data () {
     return {
       list: [],
-      sliderValue: 2
+      sliderValue: 0,
+      message: [
+        'WELCOME',
+        'TO',
+        'E-COMMERCE',
+        'CONTENT MANAGEMENT SYSTEM'
+      ]
     }
   },
   methods: {
@@ -51,7 +58,7 @@ export default {
             height: '100%'
           },
           {
-            backgroundColor: '#eee',
+            backgroundColor: 'yellow',
             width: '100%',
             height: '100%'
           },
@@ -61,7 +68,7 @@ export default {
             height: '100%'
           },
           {
-            backgroundColor: '#eee',
+            backgroundColor: 'orange',
             width: '100%',
             height: '100%'
           }
@@ -74,17 +81,24 @@ export default {
 
 <style>
 #slider {
-  height: 80%;
+  text-align: center ! important;
+  height: 98% ! important;
+  border-radius: 10px;
+}
+
+#sliderItem {
+  display: flex ! important;
+  justify-content: center ! important;
+  align-items: center ! important;
 }
 
 .landingPage {
-    /* position: static; */
     width: 95vw;
     height: 100%;
-    /* height: 95vh; */
     border-radius: 0 1rem 1rem 0;
 }
 p {
   margin: 0;
+  font-family: 'Monoton', cursive;
 }
 </style>
