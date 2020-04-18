@@ -1,14 +1,24 @@
 <template>
   <div class="dashboard d-flex align-items-center justify-content-center">
+      <vue-element-loading :active="isLoading" :is-full-screen="true"/>
       <board></board>
   </div>
 </template>
 
 <script>
 import board from '../components/dbBoard'
+import VueElementLoading from 'vue-element-loading'
+
 export default {
   components: {
-    board
+    board,
+    VueElementLoading
+  },
+  data() { 
+    return {
+      isLoading: true
+
+    }
   },
   created () {
     if (!localStorage.access_token) {
@@ -20,8 +30,13 @@ export default {
         title: 'You are logged in successfully',
         showConfirmButton: false,
         timer: 1500
+
       })
+      this.isLoading = true
       this.$store.dispatch('getProduct')
+      .finally(() => {
+        this.isLoading = false
+      })
       console.log(this.$store.state.message)
     }
   }

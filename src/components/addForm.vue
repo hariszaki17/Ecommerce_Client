@@ -39,7 +39,6 @@ export default {
       productStock: '',
       productCategory: 'Fruit',
       productImage: null,
-      // baseUrl: 'http://localhost:3000',
       imageData: null,
       isLoading: false
     }
@@ -53,7 +52,7 @@ export default {
             throw new Error('Image is required')
         } else {
           this.isLoading = true
-          this.uploadFile(this.imageData.name, this.imageData)
+          this.uploadFile(`${this.imageData.name}-${new Date().toISOString()}`, this.imageData)
          
         }
         

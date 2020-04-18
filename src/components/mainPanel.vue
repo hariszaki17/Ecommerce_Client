@@ -1,5 +1,6 @@
 <template>
   <div class="mainPanel d-flex flex-column align-items-center">
+    <vue-element-loading :active="isLoading" :is-full-screen="true"/>
     <div class="title-cat d-flex align-items-center justify-content-center"><h2 style="color: magenta;">Category</h2></div>
     <div class="cont-cat">
       <div @click.prevent="searchCat()" class="category btn-primary d-flex align-items-center justify-content-center">All</div>
@@ -17,13 +18,27 @@
 
 <script>
 import { mapActions } from 'vuex'
+import VueElementLoading from 'vue-element-loading'
+
 export default {
   name: 'mainPanel',
+  components: {
+    VueElementLoading
+  },
+  data() {
+    return {
+      isLoading: false
+    }
+  },
   methods: {
     ...mapActions(['getProduct']),
     searchCat (tag) {
       console.log(tag)
+      this.isLoading = true
       this.getProduct(tag)
+      .finally(() => {
+        this.isLoading = false
+      })
     }
   }
 }

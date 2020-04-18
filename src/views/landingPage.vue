@@ -4,7 +4,7 @@
     id="slider"
       animation="fade"
       v-model="sliderValue"
-      :duration="1000"
+      :duration="5000"
       :speed="1000"
       class="d-flex align-items-center"
     >
@@ -15,7 +15,7 @@
         @click="changeIndex(1);"
         :style="i"
       >
-        <p style="line-height: 280px; font-size: 5rem; text-align: center;">
+        <p id="banner-text" style="line-height: 280px; font-size: 5rem; text-align: center;">
          {{message[index]}}
         </p>
       </SliderItem>
@@ -73,7 +73,7 @@ export default {
             height: '100%'
           }
         ]),
-      100
+      1000
     )
   }
 }
@@ -97,7 +97,7 @@ export default {
     height: 100%;
     border-radius: 0 1rem 1rem 0;
 }
-p {
+#banner-text {
   margin: 0;
   font-family: 'Monoton', cursive;
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="col-3 mt-1 mb-1">
+  <div class="m-1">
     <div class="card pt-4" style="width: 18rem; height: 24rem">
       <div id="img" :style="this.urlData"></div>
   <div class="card-body d-flex flex-column align-items-center">
@@ -22,6 +22,7 @@
 
 <script>
 import { mapMutations, mapActions } from 'vuex'
+import firebase from 'firebase'
 export default {
   name: 'productCard',
   props: ['id', 'name', 'image_url', 'price', 'stock', 'category'],
@@ -44,6 +45,7 @@ export default {
         if (result.value) {
           this.deleteProduct(this.id)
           .then(result => {
+            firebase.storage().refFromURL(this.image_url).delete()
             this.$swal.fire(
               'Deleted!',
               `${result.result.data.message}`,

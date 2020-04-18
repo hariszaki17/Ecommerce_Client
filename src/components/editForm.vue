@@ -137,11 +137,6 @@ export default {
                 category: this.productCategory
               }
             this.editProduct(payload)
-            .then((result) => {
-              
-            }).catch((err) => {
-              
-            })
             .finally(() => {
                 this.isLoading = false
             });

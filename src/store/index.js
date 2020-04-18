@@ -7,9 +7,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     products: [],
-    message: 'hai',
     toEditProduct: {},
-    baseUrl: 'http://localhost:3000'
+    baseUrl: 'https://intense-refuge-03921.herokuapp.com'
   },
   mutations: {
     GET_PRODUCTS (state, payload) {
@@ -64,19 +63,23 @@ export default new Vuex.Store({
     getProduct (context, tag) {
       const categorySrc = tag || ''
       console.log(tag)
-      return axios({
-        method: 'GET',
-        url: this.state.baseUrl + '/products?category=' + categorySrc,
-        headers: {
-          access_token: localStorage.access_token
-        }
-      })
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'GET',
+          url: this.state.baseUrl + '/products?category=' + categorySrc,
+          headers: {
+            access_token: localStorage.access_token
+          }
+        })
         .then((result) => {
+          resolve(result)
           console.log(result.data.products)
           context.commit('GET_PRODUCTS', result.data.products)
         }).catch((err) => {
+          reject(err)
           console.log(err)
         })
+      }) 
     },
     deleteProduct (context, id) {
       return new Promise((resolve, reject) => {

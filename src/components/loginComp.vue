@@ -4,10 +4,11 @@
           <h1 style="color: white;">Account Login</h1>
       </div>
       <div class="bg-light p-5" style="border-radius: 15px;">
-          <form @submit.prevent="login">
+          <form>
               <input type="text" name="email" id="email" class="form-control" placeholder="email" v-model="emailInput"> <br>
               <input type="password" name="password" class="form-control"  id="password" placeholder="password" v-model="passwordInput"><br>
-              <button id="buttonSubmit" type="submit" class="form-control" style="color: white;">Login</button>
+              <button @click.prevent="login" id="buttonSubmit" type="submit" class="form-control" style="color: white;" v-if="!isLoading">Login</button>
+              <button id="buttonSubmit" type="submit" class="form-control" style="color: white;" v-else><img src="../assets/Pulse-1s-28px.gif" alt="" style="height: 22px; width: 22px;"></button>
           </form>
       </div>
   </div>
@@ -21,7 +22,8 @@ export default {
   data () {
     return {
       emailInput: '',
-      passwordInput: ''
+      passwordInput: '',
+      isLoading: false
     }
   },
   computed: {
@@ -30,6 +32,7 @@ export default {
   methods: {
     login () {
       console.log(this.emailInput, this.passwordInput)
+      this.isLoading = true
       axios({
         method: 'POST',
         url: this.baseUrl + '/users/login',
@@ -48,6 +51,9 @@ export default {
             title: 'Error!',
             text: `${err.response.data.errors[0].message}`
           })
+        })
+        .finally(() => {
+          this.isLoading = false
         })
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <div class="sidePanel">
-    <div class="row p-5">
+    <div class="d-flex flex-wrap justify-content-center align-items-start p-2" style="width: 100%; height: 100%;">
       <productCard v-for="product in products" :key="product.id" :name="product.name" :price="product.price" :image_url="product.image_url" :stock="product.stock" :id="product.id" :category="product.category"></productCard>
     </div>
   </div>
