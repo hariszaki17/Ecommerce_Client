@@ -37,7 +37,7 @@ export default new Vuex.Store({
             reject(err.response.data.errors)
             console.log(err.response)
           })
-      }) 
+      })
     },
     editProduct (context, payload) {
       return new Promise((resolve, reject) => {
@@ -58,7 +58,7 @@ export default new Vuex.Store({
             reject(err)
             console.log(err)
           })
-      }) 
+      })
     },
     getProduct (context, tag) {
       const categorySrc = tag || ''
@@ -71,15 +71,15 @@ export default new Vuex.Store({
             access_token: localStorage.access_token
           }
         })
-        .then((result) => {
-          resolve(result)
-          console.log(result.data.products)
-          context.commit('GET_PRODUCTS', result.data.products)
-        }).catch((err) => {
-          reject(err)
-          console.log(err)
-        })
-      }) 
+          .then((result) => {
+            resolve(result)
+            console.log(result.data.products)
+            context.commit('GET_PRODUCTS', result.data.products)
+          }).catch((err) => {
+            reject(err)
+            console.log(err)
+          })
+      })
     },
     deleteProduct (context, id) {
       return new Promise((resolve, reject) => {
@@ -96,15 +96,12 @@ export default new Vuex.Store({
             })
             context.dispatch('getProduct')
           }).catch((err) => {
-            reject({
-              errors: err
-            })
+            reject(err)
             console.log(err)
           })
-      }) 
+      })
     }
   },
   modules: {
   }
 })
-
