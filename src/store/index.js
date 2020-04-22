@@ -9,6 +9,7 @@ export default new Vuex.Store({
     products: [],
     toEditProduct: {},
     baseUrl: 'https://intense-refuge-03921.herokuapp.com'
+    // baseUrl: 'http://localhost:3000'
   },
   mutations: {
     GET_PRODUCTS (state, payload) {
