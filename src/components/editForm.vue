@@ -10,13 +10,8 @@
             <input type="text" name="stock" class="form-control"  id="stock" placeholder="stock" v-model="productStock"><br>
             <select name="category" id="category" class="form-control" v-model="productCategory">
                 <option value="Fruit">Fruit</option>
-                <option value="Apparel">Apparel</option>
-                <option value="Automotive">Automotive</option>
-                <option value="Gadget">Gadget</option>
-                <option value="Tool">Tool</option>
-                <option value="Building">Building</option>
-                <option value="Health">Health</option>
-                <option value="Other">Other</option>
+                <option value="Vegetable">Vegetable</option>
+                <option value="Herb">Herb</option>
             </select><br><br><br>
             <button id="btnEdit" type="submit" class="form-control btn-light" style="color: magenta;">Submit</button>
       </form>
@@ -93,22 +88,21 @@ export default {
       console.log(this.imageData)
     },
     edit () {
-       try {
+      try {
         if (!this.imageData) {
-            const payload = {
-                id: this.productId,
-                name: this.productName,
-                image_url: this.productUrl,
-                price: +this.productPrice,
-                stock: +this.productStock,
-                category: this.productCategory
-              }
-            this.editProduct(payload)
+          const payload = {
+            id: this.productId,
+            name: this.productName,
+            image_url: this.productUrl,
+            price: +this.productPrice,
+            stock: +this.productStock,
+            category: this.productCategory
+          }
+          this.editProduct(payload)
         } else {
           this.isLoading = true
           this.uploadFile(this.imageData)
         }
-        
       } catch (error) {
         this.$swal.fire({
           icon: 'error',
@@ -136,10 +130,10 @@ export default {
                 stock: +this.productStock,
                 category: this.productCategory
               }
-            this.editProduct(payload)
-            .finally(() => {
-                this.isLoading = false
-            });
+              this.editProduct(payload)
+                .finally(() => {
+                  this.isLoading = false
+                })
             })
             .catch(reject => {
               this.isLoading = false

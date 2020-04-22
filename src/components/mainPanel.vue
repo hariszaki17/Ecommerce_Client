@@ -5,13 +5,8 @@
     <div class="cont-cat">
       <div @click.prevent="searchCat()" class="category btn-primary d-flex align-items-center justify-content-center">All</div>
       <div @click.prevent="searchCat('Fruit')" class="category btn-primary d-flex align-items-center justify-content-center">Fruit</div>
-      <div @click.prevent="searchCat('Apparel')" class="category btn-primary d-flex align-items-center justify-content-center">Apparel</div>
-      <div @click.prevent="searchCat('Automotive')" class="category btn-primary d-flex align-items-center justify-content-center">Automotive</div>
-      <div @click.prevent="searchCat('Gadget')" class="category btn-primary d-flex align-items-center justify-content-center">Gadget</div>
-      <div @click.prevent="searchCat('Tool')" class="category btn-primary d-flex align-items-center justify-content-center">Tool</div>
-      <div @click.prevent="searchCat('Building')" class="category btn-primary d-flex align-items-center justify-content-center">Building</div>
-      <div @click.prevent="searchCat('Health')" class="category btn-primary d-flex align-items-center justify-content-center">Health</div>
-      <div @click.prevent="searchCat('Other')" class="category btn-primary d-flex align-items-center justify-content-center">Other</div>
+      <div @click.prevent="searchCat('Vegetable')" class="category btn-primary d-flex align-items-center justify-content-center">Vegetable</div>
+      <div @click.prevent="searchCat('Herb')" class="category btn-primary d-flex align-items-center justify-content-center">Herb</div>
     </div>
   </div>
 </template>
@@ -25,7 +20,7 @@ export default {
   components: {
     VueElementLoading
   },
-  data() {
+  data () {
     return {
       isLoading: false
     }
@@ -36,9 +31,9 @@ export default {
       console.log(tag)
       this.isLoading = true
       this.getProduct(tag)
-      .finally(() => {
-        this.isLoading = false
-      })
+        .finally(() => {
+          this.isLoading = false
+        })
     }
   }
 }

@@ -16,7 +16,6 @@
 
 <script>
 import axios from 'axios'
-import { mapState } from 'vuex' 
 export default {
   name: 'formLogin',
   data () {
@@ -32,7 +31,7 @@ export default {
       this.isLoading = true
       axios({
         method: 'POST',
-        url: this.baseUrl + '/users/login',
+        url: this.$store.state.baseUrl + '/users/login',
         data: {
           email: this.emailInput,
           password: this.passwordInput
@@ -43,7 +42,11 @@ export default {
           this.$router.push('home')
         })
         .catch((err) => {
-          console.log(err)
+          this.$swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: `${err.response.data.errors[0].message}`,
+          })
         })
         .finally(() => {
           this.isLoading = false

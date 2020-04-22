@@ -44,21 +44,21 @@ export default {
       }).then((result) => {
         if (result.value) {
           this.deleteProduct(this.id)
-          .then(result => {
-            firebase.storage().refFromURL(this.image_url).delete()
-            this.$swal.fire(
-              'Deleted!',
+            .then(result => {
+              firebase.storage().refFromURL(this.image_url).delete()
+              this.$swal.fire(
+                'Deleted!',
               `${result.result.data.message}`,
               'success'
-            )
-          })
-          .catch(err => {
-            this.$swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
-          })
-          })
+              )
+            })
+            .catch(err => {
+              this.$swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!'
+              })
+            })
         }
       })
     }

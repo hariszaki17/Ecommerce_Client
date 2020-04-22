@@ -33,7 +33,13 @@ export default {
   data () {
     return {
       list: [],
-      sliderValue: 2
+      sliderValue: 2,
+      message: [
+        'WELCOME',
+        'TO',
+        'OUR',
+        'CONTENT MANAGEMENT SYSTEM'
+      ]
     }
   },
   methods: {
