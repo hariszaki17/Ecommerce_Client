@@ -14,7 +14,7 @@ export default {
     board,
     VueElementLoading
   },
-  data () {
+  data() { 
     return {
       isLoading: true
 
@@ -34,9 +34,9 @@ export default {
       })
       this.isLoading = true
       this.$store.dispatch('getProduct')
-        .finally(() => {
-          this.isLoading = false
-        })
+      .finally(() => {
+        this.isLoading = false
+      })
       console.log(this.$store.state.message)
     }
   }
