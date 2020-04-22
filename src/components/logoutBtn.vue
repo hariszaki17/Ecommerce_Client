@@ -1,5 +1,5 @@
 <template>
-  <button @click.prevent="logout" id="btn-logout" class="btn-danger form-control m-2"><i class='fas fa-power-off'></i></button>
+  <button id="btn-logout" class="btn-danger form-control m-2">LG</button>
 </template>
 
 <script>

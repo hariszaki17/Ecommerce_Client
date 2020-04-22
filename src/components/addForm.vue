@@ -10,8 +10,13 @@
             <input type="text" name="stock" class="form-control"  id="stock" placeholder="stock" v-model="productStock" required><br>
             <select name="category" id="category" class="form-control" v-model="productCategory">
                 <option value="Fruit">Fruit</option>
-                <option value="Vegetable">Vegetable</option>
-                <option value="Herb">Herb</option>
+                <option value="Apparel">Apparel</option>
+                <option value="Automotive">Automotive</option>
+                <option value="Gadget">Gadget</option>
+                <option value="Tool">Tool</option>
+                <option value="Building">Building</option>
+                <option value="Health">Health</option>
+                <option value="Other">Other</option>
             </select><br><br><br>
             <button id="buttonSbt" type="submit" class="form-control btn-light" style="color: magenta;">Submit</button>
       </form>
@@ -44,11 +49,13 @@ export default {
       try {
         if (!this.imageData) {
           console.log('haiii semua')
-          throw new Error('Image is required')
+            throw new Error('Image is required')
         } else {
           this.isLoading = true
           this.uploadFile(`${this.imageData.name}-${new Date().toISOString()}`, this.imageData)
+         
         }
+        
       } catch (error) {
         this.$swal.fire({
           icon: 'error',
@@ -78,26 +85,26 @@ export default {
                 stock: +this.productStock,
                 category: this.productCategory
               }
-
+              
               this.addProduct(payload)
-                .then((result) => {
-                  console.log(result, '<<<<<<')
-                }).catch((err) => {
-                  console.log('wawa')
-                  let errorsMessage = ''
-                  err.forEach(el => {
-                    errorsMessage += el.message + '\n\n'
-                  })
-                  this.$swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: `${errorsMessage}`
-                  })
-                  console.log(err, '<<<<<<<')
+              .then((result) => {
+                console.log(result, '<<<<<<')
+              }).catch((err) => {
+                console.log('wawa')
+                let errorsMessage = ''
+                err.forEach(el => {
+                  errorsMessage += el.message + '\n\n'
                 })
-                .finally(() => {
-                  this.isLoading = false
+                this.$swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: `${errorsMessage}`
                 })
+                console.log(err, '<<<<<<<')
+              })
+              .finally(() => {
+                this.isLoading = false
+              });
               this.productName = ''
               this.productPrice = ''
               this.productStock = ''

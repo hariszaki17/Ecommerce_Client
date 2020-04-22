@@ -55,10 +55,10 @@ export default new Vuex.Store({
             context.dispatch('getProduct')
             router.push('/home/dashboard')
           }).catch((err) => {
-            resolve(err)
+            reject(err)
             console.log(err)
           })
-      })  
+      })
     },
     getProduct (context, tag) {
       const categorySrc = tag || ''
@@ -96,7 +96,9 @@ export default new Vuex.Store({
             })
             context.dispatch('getProduct')
           }).catch((err) => {
-            reject(err)
+            reject({
+              errors: err
+            })
             console.log(err)
           })
       })

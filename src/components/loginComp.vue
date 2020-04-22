@@ -26,9 +26,6 @@ export default {
       isLoading: false
     }
   },
-  computed: {
-    ...mapState(['baseUrl'])
-  },
   methods: {
     login () {
       console.log(this.emailInput, this.passwordInput)
@@ -46,11 +43,7 @@ export default {
           this.$router.push('home')
         })
         .catch((err) => {
-          this.$swal.fire({
-            icon: 'error',
-            title: 'Error!',
-            text: `${err.response.data.errors[0].message}`
-          })
+          console.log(err)
         })
         .finally(() => {
           this.isLoading = false

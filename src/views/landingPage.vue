@@ -9,7 +9,6 @@
       class="d-flex align-items-center"
     >
       <SliderItem
-      id="sliderItem"
         v-for="(i, index) in list"
         :key="index"
         @click="changeIndex(1);"
@@ -34,13 +33,7 @@ export default {
   data () {
     return {
       list: [],
-      sliderValue: 0,
-      message: [
-        'WELCOME',
-        'TO',
-        'E-COMMERCE',
-        'CONTENT MANAGEMENT SYSTEM'
-      ]
+      sliderValue: 2
     }
   },
   methods: {
@@ -58,7 +51,7 @@ export default {
             height: '100%'
           },
           {
-            backgroundColor: 'yellow',
+            backgroundColor: '#eee',
             width: '100%',
             height: '100%'
           },
@@ -68,7 +61,7 @@ export default {
             height: '100%'
           },
           {
-            backgroundColor: 'orange',
+            backgroundColor: '#eee',
             width: '100%',
             height: '100%'
           }
@@ -81,24 +74,17 @@ export default {
 
 <style>
 #slider {
-  text-align: center ! important;
-  height: 98% ! important;
-  border-radius: 10px;
-}
-
-#sliderItem {
-  display: flex ! important;
-  justify-content: center ! important;
-  align-items: center ! important;
+  height: 80%;
 }
 
 .landingPage {
+    /* position: static; */
     width: 95vw;
     height: 100%;
+    /* height: 95vh; */
     border-radius: 0 1rem 1rem 0;
 }
 #banner-text {
   margin: 0;
-  font-family: 'Monoton', cursive;
 }
 </style>

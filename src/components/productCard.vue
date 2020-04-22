@@ -53,7 +53,6 @@ export default {
               )
             })
             .catch(err => {
-              console.log(err)
               this.$swal.fire({
                 icon: 'error',
                 title: 'Oops...',
